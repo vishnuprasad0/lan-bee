@@ -10,7 +10,9 @@ the BeeBEEP project.
 
 ## Download
 
-Get the latest version from the
+**Android:** [Get LAN Bee on Google Play](https://play.google.com/store/apps/details?id=com.appmavens.lanbee)
+
+**Windows and macOS:** get the latest version from the
 [Releases page](https://github.com/vishnuprasad0/lan-bee/releases/latest).
 
 | Platform | File |
@@ -18,8 +20,7 @@ Get the latest version from the
 | Windows 10 (1809 or later) and 11, 64-bit | `LAN-Bee-Setup-<version>-x64.exe` (installer) |
 | Windows, no install | `LAN-Bee-<version>-windows-x64-portable.zip` |
 | macOS 10.15 or later (Apple Silicon and Intel) | `LAN-Bee-<version>-macos.dmg` |
-
-An Android version is coming to Google Play.
+| Android | [Google Play](https://play.google.com/store/apps/details?id=com.appmavens.lanbee) |
 
 ## Install on Windows
 
