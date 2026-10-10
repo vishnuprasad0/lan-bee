@@ -8,6 +8,8 @@ LAN Bee is inspired by, and works with, [BeeBEEP](https://www.beebeep.net),
 so you can talk to colleagues who already use BeeBEEP on their desktop.
 See [Thank you, BeeBEEP](#thank-you-beebeep).
 
+Free and open source under the [GNU GPL v3](LICENSE), like BeeBEEP.
+
 ## Download
 
 **Android:** [Get LAN Bee on Google Play](https://play.google.com/store/apps/details?id=com.appmavens.lanbee)
@@ -64,16 +66,69 @@ showed how simple office chat can be: no server, no account, nothing
 leaving your network. That idea is the heart of LAN Bee, and we are
 grateful to its developer for building it and sharing it with the world.
 
-We made LAN Bee to bring the same experience to the places we needed it
-most: the phones we all carry every day, and current Macs, including Apple
-Silicon models, where we could no longer run the desktop version. LAN Bee
-speaks BeeBEEP's protocol, so people on BeeBEEP desktop and people on
-LAN Bee can keep talking to each other.
+We all use our phones, and there is no mobile version of BeeBEEP, so we
+built one with [Flutter](https://flutter.dev). The same code also gave us
+Windows and macOS builds, including current Apple Silicon Macs, where we
+could no longer run the desktop version, so we made those available too.
+LAN Bee speaks BeeBEEP's protocol, so people on BeeBEEP desktop and people
+on LAN Bee can keep talking to each other.
 
 LAN Bee is an independent app. It is not affiliated with or endorsed by the
 BeeBEEP project, and all credit for the original idea goes to BeeBEEP. If
-you use BeeBEEP on your desktop, please consider supporting the project at
-[beebeep.net](https://www.beebeep.net).
+you use BeeBEEP on your desktop, please consider supporting the project:
+
+- Website: [beebeep.net](https://www.beebeep.net)
+- Source code: [SourceForge](https://sourceforge.net/p/beebeep/code/HEAD/tree/)
+- Licence: [BeeBEEP open source](https://www.beebeep.net/open-source)
+
+## Source code
+
+LAN Bee is free software, released under the same licence as BeeBEEP. The
+full source for the Android, iOS, Windows and macOS apps is in this
+repository.
+
+- `lib/core/`: the BeeBEEP-compatible protocol in pure Dart (message
+  framing, handshake, key exchange, encryption).
+- `lib/features/beebeep/`: the app, split into `data`, `domain` and
+  `presentation` layers.
+- `test/`: unit and widget tests.
+
+### Build it yourself
+
+You need [Flutter](https://docs.flutter.dev/get-started/install) 3.35 (stable).
+
+```sh
+flutter pub get
+flutter test
+flutter run                     # on a connected phone or this computer
+flutter build apk --release     # Android
+flutter build macos --release   # macOS, on a Mac
+flutter build windows --release # Windows, on a Windows PC
+```
+
+The Windows installer is built with [Inno Setup](https://jrsoftware.org/isinfo.php)
+from `windows/installer/lan_bee.iss`; `.github/workflows/windows.yml` shows
+the full build.
+
+### Contributing
+
+Bug reports and pull requests are welcome. Please keep changes compatible
+with BeeBEEP desktop: the wire protocol is what lets both apps talk.
+
+## License
+
+LAN Bee is licensed under the
+[GNU General Public License v3.0](LICENSE), the same licence as BeeBEEP.
+You may use, study, share and change it; if you distribute a modified
+version, you must share its source under the same licence.
+
+Third-party code: `packages/voice_message_recorder` is based on
+[voice_message_recorder](https://pub.dev/packages/voice_message_recorder)
+by Moeed Maqsood, under the MIT licence (see its `LICENSE` file). Other
+dependencies are listed in `pubspec.yaml` and keep their own licences.
+
+BeeBEEP is a project by its own authors; the name is used here only to say
+that LAN Bee is compatible with it.
 
 ## Problems
 

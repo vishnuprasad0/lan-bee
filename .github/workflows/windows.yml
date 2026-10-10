@@ -1,0 +1,67 @@
+name: Windows build
+
+# Flutter builds Windows apps only on a Windows host, so the release build
+# runs here. Start it from the Actions tab, or push a v* tag. The artifact
+# holds the installer and a portable zip.
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+jobs:
+  build:
+    # windows-2022 has Visual Studio 2022. Flutter 3.35 does not detect the
+    # newer Visual Studio on windows-latest and falls back to VS 2019.
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.35.7
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+      - run: flutter analyze lib test
+
+      - name: Tests
+        run: flutter test
+        continue-on-error: true
+
+      - run: flutter build windows --release
+
+      # App-local VC++ runtime, so the app starts on PCs without the
+      # Visual C++ Redistributable installed.
+      - name: Bundle VC++ runtime
+        shell: pwsh
+        run: |
+          foreach ($dll in 'msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll') {
+            Copy-Item "$env:WINDIR\System32\$dll" build/windows/x64/runner/Release/
+          }
+
+      - name: Version
+        id: version
+        shell: pwsh
+        run: |
+          $v = (Select-String -Path pubspec.yaml -Pattern '^version:\s*([0-9.]+)').Matches[0].Groups[1].Value
+          "value=$v" >> $env:GITHUB_OUTPUT
+
+      - name: Installer
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) {
+            choco install innosetup -y --no-progress
+          }
+          & $iscc "/DAppVersion=${{ steps.version.outputs.value }}" windows\installer\lan_bee.iss
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Portable zip
+        shell: pwsh
+        run: Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath build/installer/LAN-Bee-${{ steps.version.outputs.value }}-windows-x64-portable.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lan_bee_windows_x64
+          path: build/installer/*
