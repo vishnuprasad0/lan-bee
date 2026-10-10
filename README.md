@@ -4,9 +4,9 @@ Chat, send files and voice messages with people on the same Wi-Fi or office
 network. No server, no account, no internet: everything goes directly
 between computers on your local network.
 
-LAN Bee works with [BeeBEEP](https://www.beebeep.net) desktop, so you can
-talk to colleagues who already use BeeBEEP. LAN Bee is not affiliated with
-the BeeBEEP project.
+LAN Bee is inspired by, and works with, [BeeBEEP](https://www.beebeep.net),
+so you can talk to colleagues who already use BeeBEEP on their desktop.
+See [Thank you, BeeBEEP](#thank-you-beebeep).
 
 ## Download
 
@@ -56,6 +56,24 @@ asks, allow access on **private networks**.
 
 LAN Bee has no analytics, ads or tracking. Messages and files go only to the
 person you are talking to, and chat history stays on your computer.
+
+## Thank you, BeeBEEP
+
+LAN Bee would not exist without [BeeBEEP](https://www.beebeep.net). BeeBEEP
+showed how simple office chat can be: no server, no account, nothing
+leaving your network. That idea is the heart of LAN Bee, and we are
+grateful to its developer for building it and sharing it with the world.
+
+We made LAN Bee to bring the same experience to the places we needed it
+most: the phones we all carry every day, and current Macs, including Apple
+Silicon models, where we could no longer run the desktop version. LAN Bee
+speaks BeeBEEP's protocol, so people on BeeBEEP desktop and people on
+LAN Bee can keep talking to each other.
+
+LAN Bee is an independent app. It is not affiliated with or endorsed by the
+BeeBEEP project, and all credit for the original idea goes to BeeBEEP. If
+you use BeeBEEP on your desktop, please consider supporting the project at
+[beebeep.net](https://www.beebeep.net).
 
 ## Problems
 
